@@ -1,5 +1,7 @@
 // TODO: Include packages needed for this application
-
+var inquirer = require("inquirer");
+var fs = require("fs");
+var generateMarkdown = require(./generateMarkdown);
 // TODO: Create an array of questions for user input
 const questions = [];
 
