@@ -1,98 +1,103 @@
 // TODO: Include packages needed for this application
-const inquirer = require("inquirer");
-const fs = require("fs");
+const fs = require('fs');
+const inquirer = require('inquirer');
 const generateMarkdown = require("./utils/generateMarkdown");
+
 // TODO: Create an array of questions for user input
-const questionsPrompt = async () => {
-    const answers = await inquirer.prompt([
-        // asks user for the project's title/name
-        {
-            type: "input",
-            name: "Title",
-            message: "What is the TITLE of your project?"
-        },
-
-        // asks user to enter a description of the project
-        {
-            type: "input",
-            name: "Description",
-            message: "Provide/Enter a brief DESCRIPTION of your project:"
-        },
-
-        // asks user to explain what the project is/could be used for
-        {
-            type: "input",
-            name: "Usage Information",
-            message: "Enter/Explain what your project is/could be used for:"
-        },
-
-        // asks user to enter instructions for installing/using the project
-        {
-            type: "input",
-            name: "Installation Instructions",
-            message: "Provide/Enter step-by-step INSTALLATION-INSTRUCTIONS for your project:"
-        },
-
-        // asks user to enter/cite resources used and any other contributors involved in the development of the project
-        {
-            type: "input",
-            name: "Resources",
-            message: "Enter/Cite any sources used in the development of your project: "
-        },
-
-        // asks user to list any
-        {
-            type: "input",
-            name: "Contribute",
-            message: "Please list any guidlines for CONTRIBUTING to this project:"
-        },
-
-        // asks the user for licensing information
-        {
-            name: "License",
-            type: "list",
-            message: "Select any LICENSE associated with your project:",
-            choices: ['Mit', 'ISC', 'Apache', 'none'],
-            validate: choicesLength_1 => {
-                if (choicesLength_1.length <= 1) {
-                    return true;
-                } else {
-                    return "Please select one license!";
-                }
-            }
-        },
-
-        // asks user for their GitHub information
-        {
-            type: "input",
-            name: "userGithub",
-            message: "What is your GitHub username?:(Required)",
-        },
-
-        // asks user to enter their Email
-        {
-            type: "input",
-            name: "Email",
-            message: "What is a good EMAIL someone can reach you at?:(Required)"
-        },
-    ]);
-    writeToFile('README.md', generateMarkdown(answers));
-
-    
-
-}
-
-promptUser()
+const questions = [
+    {
+        type: "input",
+        name: "title",
+        message: "What is the title of your project? (Required)",
+        validate: titleInput => {
+          if (titleInput) {
+            return true;
+          } else {
+            console.log("Please enter your project title.");
+            return false;
+          }
+        }
+      },
+      {
+        type: "input",
+        name: "projectDescription",
+        message: "Briefly give an explanation of your project. (Required)",
+        validate: description => {
+          if (description) {
+            return true;
+          } else {
+            console.log("Please write a short description.");
+            return false;
+          }
+        }
+      },
+      {
+        type: "input",
+        name: "installInfo",
+        message: "Provide any installation instructions here:",
+      },
+      {
+        type: 'checkbox',
+        name: 'license',
+        message: 'Which license is used for this project:',
+        choices: ['Apache', 'Mozilla', 'MIT', 'GNU', 'Boost', 'ISC'],
+        validate: choicesLength => {
+          if (choicesLength.length <= 1) {
+            return true;
+          } else {
+            return "Please select one license!";
+          }
+        }
+      },
+      {
+        type: "input",
+        name: "usageInfo",
+        message: "Describe the main use case for this project/application:",
+      },
+      {
+        type: "input",
+        name: "contributionsInfo",
+        message: "Are their any guidlines for contributing to this project:",
+      },
+      {
+        type: "input",
+        name: "testsInfo",
+        message: "Which tests would you like to include:",
+      },
+      {
+        type: "input",
+        name: "githubUsername",
+        message: "What is your GitHub username (Required)?",
+      },
+      {
+        type: "input",
+        name: "emailInfo",
+        message: "What is a good email someone can reach you(Required)?",
+      }
+];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-
-    return fs.writeFileSync(fileName, data)
-    
+    fs.writeFile("./dist/README.md", generateMarkdown(data), function(err) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log('Success!');
+      });
 }
 
 // TODO: Create a function to initialize app
-//function init() {}
+function init() { 
+    inquirer.prompt(questions)
+    .then(function(answer) {
+      const fileName =
+        answer.title
+          .split(' ')
+          .join('') + '.md';
+      
+      writeToFile(fileName, answer);
+    });
+}
 
 // Function call to initialize app
-//init();
+init();

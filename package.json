@@ -1,7 +1,7 @@
 {
   "name": "readme-generator",
   "version": "1.0.0",
-  "description": "a README.md file generator app",
+  "description": "a README file generator app",
   "main": "index.js",
   "dependencies": {
     "fs": "^0.0.1-security",
