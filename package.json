@@ -1,15 +1,33 @@
 {
-  "name": "",
+  "name": "readme-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "[How to create a Professional README](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Megan Beekman",
   "license": "ISC",
   "dependencies": {
     "fs": "^0.0.1-security",
-    "inquirer": "^6.5.2"
-  }
+    "inquirer": "^6.5.2",
+    "promisify": "0.0.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meganbeek98/readme-generator.git"
+  },
+  "keywords": [
+    "readme",
+    "read",
+    "me",
+    "generator",
+    "npm",
+    "node"
+  ],
+  "bugs": {
+    "url": "https://github.com/meganbeek98/readme-generator/issues"
+  },
+  "homepage": "https://github.com/meganbeek98/readme-generator#readme"
 }
