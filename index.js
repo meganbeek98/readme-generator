@@ -52,7 +52,7 @@ const questionsPrompt = async () => {
             name: "License",
             type: "list",
             message: "Select any LICENSE associated with your project:",
-            choices: ['Mit', 'ISC', 'Apache', 'n/a (none)'],
+            choices: ['Mit', 'ISC', 'Apache', 'none'],
             validate: choicesLength_1 => {
                 if (choicesLength_1.length <= 1) {
                     return true;
@@ -65,7 +65,7 @@ const questionsPrompt = async () => {
         // asks user for their GitHub information
         {
             type: "input",
-            name: "github",
+            name: "userGithub",
             message: "What is your GitHub username?:(Required)",
         },
 
