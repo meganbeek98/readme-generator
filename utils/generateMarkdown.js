@@ -94,8 +94,43 @@ function generateMarkdown(userResponses, userInfo) {
   ${userResponses.tests}`
   };
 
+   // License Section (required)
+   draftMarkdown +=
+   `
+   
+   ## License
+   
+   ${userResponses.license}
+   `;
+ 
+ 
+   // 'About-the-Developer' Questions Section
+   let draftDev = 
+   `
+   ---
 
+   ## Questions?
+  <img src="${userInfo.avatar_url}" alt="${userInfo.login}" width="40%" />
+  
+  For any questions, please contact me with the information below:
+ 
+  GitHub: [@${userInfo.login}](${userInfo.url})
+  `;
 
+  // IF GitHub/GitHub-email is valid, add to 'Developer' Section
+  if (userInfo.email !== null) {
+  
+  draftDev +=
+  `
+  Email: ${userInfo.email}
+  `};
 
+  // ADDS developer-question answers Section to .md file
+  draftMarkdown += draftDev;
+
+  // Return markdown
+  return draftMarkdown;
+  
+}
 
 module.exports = generateMarkdown;
