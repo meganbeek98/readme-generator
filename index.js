@@ -35,41 +35,30 @@ const questions = [
     },
     {
       type: 'input',
-      message: "What is the title of your project?",
-      name: 'title',
-      default: 'Project Title',
-      validate: function (answer) {
-          if (answer.length < 1) {
-              return console.log("A project title, is a required field.");
-          }
-          return true;
-      }
-    },
-        {
-          type: "input",
-          name: "usageInfo",
-          message: "Describe the main use case for this project/application:",
-        },
-        {
-          type: "input",
-          name: "contributionsInfo",
-          message: "Are their any guidlines for contributing to this project:",
-        },
-        {
-          type: "input",
-          name: "testsInfo",
-          message: "Which tests would you like to include:",
-        },
-        {
-          type: "input",
-          name: "githubUsername",
-          message: "What is your GitHub username (Required)?",
-        },
-        {
-          type: "input",
-          name: "emailInfo",
-          message: "What is a good email someone can reach you(Required)?",
-        }
+      message: "Please describe the steps required to install your project:",
+      name: 'installation'
+  },
+  {
+      type: 'input',
+      message: "Describe what and how your project is used; provide instructions and examples.",
+      name: 'usage'
+  },
+  {
+      type: 'input',
+      message: "Please list any guidelines (if applicable) on how other developers can contribute to your project.",
+      name: 'contributing'
+  },
+  {
+      type: 'input',
+      message: "List any and all tests written for your application; provide examples on how to run them (if applicable).",
+      name: 'tests'
+  },
+  {
+      type: 'list',
+      message: "Choose a license for your project.",
+      choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense'],
+      name: 'license'
+  }
 ];
 
 // TODO: Create a function to write README file
