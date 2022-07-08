@@ -1,11 +1,8 @@
-const axios = require('axios');
+import { get } from 'axios';
 
 const api = {
   async getUser(userResponses) {
-    try { let response = await axios
-        
-      // user github URL
-        .get(`https://api.github.com/users/${userResponses.username}`);
+    try { let response = await get(`https://api.github.com/users/${userResponses.username}`);
         return response.data;
 
       } catch (error) {
@@ -14,4 +11,4 @@ const api = {
   }
 };
 
-module.exports = api;
+export default api;

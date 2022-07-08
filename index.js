@@ -4,7 +4,7 @@ const fs = require('fs');
 const util = require('util');
 
 // Internal modules
-const api = require('./utils/api.js');
+const api = require('./utils/api.js').default;
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
