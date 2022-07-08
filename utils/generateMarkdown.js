@@ -22,32 +22,79 @@ function generateMarkdown(userResponses, userInfo) {
   let draftMarkdown = 
   `# ${userResponses.title}
 
-
-  // TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-
-## Description 
+  ## Description 
   
-*The what, why, and how:* 
+  *The what, why, and how:* 
+  
+  ${userResponses.description}
+  `
 
-${userResponses.description}
-`
+  // Add Table of Contents to markdown
+  draftMarkdown += draftToC;
+ 
+  // Add License section since License is required to Table of Contents
+  draftMarkdown += `
+  * [License](#license)`;
+  
 
-// Add Table of Contents to markdown
-draftMarkdown += draftToC;
+  // Optional Installation section
+  if (userResponses.installation !== '') {
+  
+  draftMarkdown +=
+  `
+  
+  ## Installation
+  
+  *Steps required to install project and how to get the development environment running:*
+  
+  ${userResponses.installation}`
+  };
+  
 
-// Add License section since License is required to Table of Contents
-draftMarkdown += `
-* [License](#license)`;
+  // Optional Usage section
+  if (userResponses.usage !== '') {
+  
+  draftMarkdown +=
+  
+  `
+  
+  ## Usage 
+  
+  *Instructions and examples for use:*
+  
+  ${userResponses.usage}`
+  };
+  
+  
+  // Optional Contributing section
+  if (userResponses.contributing !== '') {
+
+  draftMarkdown +=
+    
+  `
+  
+  ## Contributing
+  
+  *If you would like to contribute it, you can follow these guidelines for how to do so.*
+  
+  ${userResponses.contributing}`
+  };
+  
+
+  // Optional Tests section
+  if (userResponses.tests !== '') {
+  
+  draftMarkdown +=
+  `
+  
+  ## Tests
+  
+  *Tests for application and how to run them:*
+  
+  ${userResponses.tests}`
+  };
 
 
-// Optional Installation section
-if (userResponses.installation !== '') {
-
-draftMarkdown +=
-
-## Installation
-  These are the steps required to install project and then deploy it:*
 
 
 
