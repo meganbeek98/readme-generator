@@ -92,12 +92,12 @@ async function init() {
       console.log(markdown);
   
       // Write markdown to file
-      await writeFileAsync('ExampleREADME.md', markdown);
+      await writeFileAsync('EXAMPLE-ReadMe.md', markdown);
 
   } catch (error) {
       console.log(error);
   }
 };
 
-// Function call to initialize app
+// function call that starts/runs the app (initialize the app)
 init();
