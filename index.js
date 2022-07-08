@@ -1,11 +1,11 @@
-// TODO: Include packages needed for this application
-const fs = require('fs');
+// required packages:
 const inquirer = require('inquirer');
-const util = require('util')
+const fs = require('fs');
+const util = require('util');
 
-const api = require('./utils/api.js')
-
-const generateMarkdown = require("./utils/generateMarkdown");
+// Internal modules
+const api = require('./utils/api.js');
+const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -13,7 +13,7 @@ const questions = [
       type: 'input',
       message: "What is your GitHub username?",
       name: 'username',
-      default: 'connietran-dev',
+      default: 'meganbeek98',
       validate: function (answer) {
           if (answer.length < 1) {
               return console.log("A valid GitHub username, is a required field.");
@@ -60,16 +60,6 @@ const questions = [
       name: 'license'
   }
 ];
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-    fs.writeFile("./dist/README.md", generateMarkdown(data), function(err) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log('Success!');
-      });
-}
 
 // TODO: Create a function to initialize app
 function writeToFile(fileName, data) {
