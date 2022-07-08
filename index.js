@@ -72,17 +72,42 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init() { 
-    inquirer.prompt(questions)
-    .then(function(answer) {
-      const fileName =
-        answer.title
-          .split(' ')
-          .join('') + '.md';
-      
-      writeToFile(fileName, answer);
-    });
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, err => {
+      if (err) {
+        return console.log(err);
+      }
+    
+      console.log("All done! You just generated your README.md file!")
+  });
 }
+
+const writeFileAsync = util.promisify(writeToFile);
+
+async function init() {
+  try {
+
+      // prompts the questions (inquirer)
+      const userResponses = await inquirer.prompt(questions);
+      console.log("Your responses: ", userResponses);
+      console.log("Thank you for your responses! Fetching your GitHub data next...");
+  
+      // calls for user info (user GitHub)
+      const userInfo = await api.getUser(userResponses);
+      console.log("Your GitHub user info: ", userInfo);
+  
+      // passes inputs to generateMarkdown file
+      console.log("Generating your README next...")
+      const markdown = generateMarkdown(userResponses, userInfo);
+      console.log(markdown);
+  
+      // Write markdown to file
+      await writeFileAsync('ExampleREADME.md', markdown);
+
+  } catch (error) {
+      console.log(error);
+  }
+};
 
 // Function call to initialize app
 init();
