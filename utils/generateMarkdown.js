@@ -2,7 +2,7 @@
 // If there is no license, return an empty string
 function generateMarkdown(userResponses, userInfo) {
 
-  // Generate Table of Contents conditionally based on userResponses
+  // Generate Table of Contents -- based on userResponses
   let draftToC = `## Table of Contents`;
 
   if (userResponses.installation !== '') { draftToC += `
@@ -18,9 +18,12 @@ function generateMarkdown(userResponses, userInfo) {
   * [Tests](#tests)` };
 
 
-  // generates the top of readme.md file
+  // generates markdown for the top of the README file (required)
   let draftMarkdown = 
   `# ${userResponses.title}
+  ![Badge for GitHub repo top language](https://img.shields.io/github/languages/top/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor) ![Badge for GitHub last commit](https://img.shields.io/github/last-commit/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor)
+  
+  Check out the badges hosted by [shields.io](https://shields.io/).
 
   ## Description 
   
@@ -37,7 +40,7 @@ function generateMarkdown(userResponses, userInfo) {
   * [License](#license)`;
   
 
-  // Optional Installation section
+  // Installation Section (Optional)
   if (userResponses.installation !== '') {
   
   draftMarkdown +=
@@ -109,10 +112,10 @@ function generateMarkdown(userResponses, userInfo) {
    `
    ---
 
-   ## Questions?
+  ## Questions?
   <img src="${userInfo.avatar_url}" alt="${userInfo.login}" width="40%" />
   
-  For any questions, please contact me with the information below:
+ Contact Me:
  
   GitHub: [@${userInfo.login}](${userInfo.url})
   `;

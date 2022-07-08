@@ -1,7 +1,7 @@
 {
   "name": "readme-generator",
   "version": "1.0.0",
-  "description": "a README file generator app",
+  "description": "a README file generator app via the command line (git)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,21 +12,17 @@
     "axios": "^0.21.2",
     "inquirer": "^6.3.1"
   },
-
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/meganbeek98/readme-generator.git"
   },
   "keywords": [
-    "readme",
-    "generator",
-    "node",
-    "npm"
+    "npm",
+    "node"
   ],
-
   "bugs": {
     "url": "https://github.com/meganbeek98/readme-generator/issues"
   },
-  "homepage": "https://github.com/meganbeek98/readme-generator#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/meganbeek98/readme-generator#readme"
 }
