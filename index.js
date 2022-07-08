@@ -1,41 +1,38 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
+const util = require('util')
+
+const api = require('./utils/api.js')
+
 const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
 const questions = [
-    {
-        type: "input",
-        name: "title",
-        message: "What is the title of your project? (Required)",
-        validate: titleInput => {
-          if (titleInput) {
-            return true;
-          } else {
-            console.log("Please enter your project title.");
-            return false;
+  {
+      type: 'input',
+      message: "What is your GitHub username? (No @ needed)",
+      name: 'username',
+      default: 'connietran-dev',
+      validate: function (answer) {
+          if (answer.length < 1) {
+              return console.log("A valid GitHub username is required.");
           }
-        }
-      },
-      {
-        type: "input",
-        name: "projectDescription",
-        message: "Briefly give an explanation of your project. (Required)",
-        validate: description => {
-          if (description) {
-            return true;
-          } else {
-            console.log("Please write a short description.");
-            return false;
+          return true;
+      }
+  },
+  {
+      type: 'input',
+      message: "What is the name of your GitHub repo?",
+      name: 'repo',
+      default: 'readme-generator',
+      validate: function (answer) {
+          if (answer.length < 1) {
+              return console.log("A valid GitHub repo is required.");
           }
-        }
-      },
-      {
-        type: "input",
-        name: "installInfo",
-        message: "Provide any installation instructions here:",
-      },
+          return true;
+      }
+  },
       {
         type: 'checkbox',
         name: 'license',
