@@ -1,7 +1,7 @@
 {
   "name": "readme-generator",
   "version": "1.0.0",
-  "description": "a README file generator app via the command line (git)",
+  "description": "an application used via the command-line, to generate a README.md for a GitHub or other project.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +19,9 @@
   },
   "keywords": [
     "npm",
-    "node"
+    "node",
+    "readme",
+    "read"
   ],
   "bugs": {
     "url": "https://github.com/meganbeek98/readme-generator/issues"

@@ -2,7 +2,7 @@
 // If there is no license, return an empty string
 function generateMarkdown(userResponses, userInfo) {
 
-  // Generate Table of Contents -- based on userResponses
+  // Generate Table of Contents conditionally based on userResponses
   let draftToC = `## Table of Contents`;
 
   if (userResponses.installation !== '') { draftToC += `
@@ -18,18 +18,21 @@ function generateMarkdown(userResponses, userInfo) {
   * [Tests](#tests)` };
 
 
-  // generates markdown for the top of the README file (required)
+  // Generate markdown for the top required portions of the README
   let draftMarkdown = 
   `# ${userResponses.title}
+
   ![Badge for GitHub repo top language](https://img.shields.io/github/languages/top/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor) ![Badge for GitHub last commit](https://img.shields.io/github/last-commit/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor)
   
   Check out the badges hosted by [shields.io](https://shields.io/).
-
+  
+  
   ## Description 
   
   *The what, why, and how:* 
   
   ${userResponses.description}
+
   `
 
   // Add Table of Contents to markdown
@@ -40,7 +43,7 @@ function generateMarkdown(userResponses, userInfo) {
   * [License](#license)`;
   
 
-  // Installation Section (Optional)
+  // Optional Installation section
   if (userResponses.installation !== '') {
   
   draftMarkdown +=
@@ -97,38 +100,42 @@ function generateMarkdown(userResponses, userInfo) {
   ${userResponses.tests}`
   };
 
-   // License Section (required)
-   draftMarkdown +=
-   `
-   
-   ## License
-   
-   ${userResponses.license}
-   `;
- 
- 
-   // 'About-the-Developer' Questions Section
-   let draftDev = 
-   `
-   ---
 
+  // License section is required
+  draftMarkdown +=
+  `
+  
+  ## License
+  
+  ${userResponses.license}
+  `;
+
+
+  // Questions / About Developer section
+  let draftDev = 
+  `
+  ---
+  
   ## Questions?
+
   <img src="${userInfo.avatar_url}" alt="${userInfo.login}" width="40%" />
   
- Contact Me:
+  For any questions, please contact me with the information below:
  
   GitHub: [@${userInfo.login}](${userInfo.url})
   `;
 
-  // IF GitHub/GitHub-email is valid, add to 'Developer' Section
+  // If GitHub email is not null, add to Developer section
   if (userInfo.email !== null) {
   
   draftDev +=
   `
+
   Email: ${userInfo.email}
+
   `};
 
-  // ADDS developer-question answers Section to .md file
+  // Add developer section to markdown
   draftMarkdown += draftDev;
 
   // Return markdown

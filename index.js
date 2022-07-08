@@ -1,22 +1,22 @@
-// packages -- (external)
+// External packages
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
 
-// modules -- (internal)
+// Internal modules
 const api = require('./utils/api.js');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
-// inquirer prompts for userResponses
+// Inquirer prompts for userResponses
 const questions = [
     {
         type: 'input',
-        message: "What is your GitHub username?",
+        message: "What is your GitHub username? (do not include the '@' sign)",
         name: 'username',
         default: 'meganbeek98',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid GitHub username, is a required field.");
+                return console.log("A valid GitHub username is required.");
             }
             return true;
         }
@@ -28,7 +28,7 @@ const questions = [
         default: 'readme-generator',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid GitHub repository name, is a required field (for badge).");
+                return console.log("A valid GitHub repo is required for a badge.");
             }
             return true;
         }
@@ -40,7 +40,7 @@ const questions = [
         default: 'Project Title',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid project title, is a required field.");
+                return console.log("A valid project title is required.");
             }
             return true;
         }
@@ -52,29 +52,29 @@ const questions = [
         default: 'Project Description',
         validate: function (answer) {
             if (answer.length < 1) {
-                return console.log("A valid project description, is a required field.");
+                return console.log("A valid project description, is required.");
             }
             return true;
         }
     },
     {
         type: 'input',
-        message: "Describe the steps required to install your project (Installation).",
+        message: "List the steps to install your project for the (Installation):",
         name: 'installation'
     },
     {
         type: 'input',
-        message: "What can / What is, your project used for? (Usage)",
+        message: "Please provide instructions and examples of your project in use (Usage):",
         name: 'usage'
     },
     {
         type: 'input',
-        message: "Please list guidelines on how other developers can contribute to your project (if applicable):",
+        message: "Please provide guidelines on how other developers can contribute to your project:",
         name: 'contributing'
     },
     {
         type: 'input',
-        message: "Please list any and all tests written for your application and provide examples on how to run them (if applicable):",
+        message: "Please list any tests written for your app and provide examples:",
         name: 'tests'
     },
     {
@@ -102,21 +102,21 @@ const writeFileAsync = util.promisify(writeToFile);
 async function init() {
     try {
 
-        // prompts the questions (inquirer)
+        // Prompt Inquirer questions
         const userResponses = await inquirer.prompt(questions);
         console.log("Your responses: ", userResponses);
         console.log("Thank you for your responses! Fetching your GitHub data next...");
     
-        // calls GitHub info api of the user
+        // Call GitHub api for user info
         const userInfo = await api.getUser(userResponses);
         console.log("Your GitHub user info: ", userInfo);
     
-        // passes inquirer+userResponses+GitHub(userInfo)--> to generateMarkdown.md
+        // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
         console.log("Generating your README next...")
         const markdown = generateMarkdown(userResponses, userInfo);
         console.log(markdown);
     
-        // writes the markdown to the Example file
+        // Write markdown to file
         await writeFileAsync('ExampleREADME.md', markdown);
 
     } catch (error) {
@@ -124,5 +124,4 @@ async function init() {
     }
 };
 
-// (initializes the app / makes it run)
 init();
