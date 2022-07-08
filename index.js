@@ -9,68 +9,67 @@ const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
 const questions = [
-  {
+    {
       type: 'input',
-      message: "What is your GitHub username? (No @ needed)",
+      message: "What is your GitHub username?",
       name: 'username',
       default: 'connietran-dev',
       validate: function (answer) {
           if (answer.length < 1) {
-              return console.log("A valid GitHub username is required.");
+              return console.log("A valid GitHub username, is a required field.");
           }
           return true;
       }
-  },
-  {
+    },
+    {
       type: 'input',
       message: "What is the name of your GitHub repo?",
       name: 'repo',
       default: 'readme-generator',
       validate: function (answer) {
           if (answer.length < 1) {
-              return console.log("A valid GitHub repo is required.");
+              return console.log("A valid GitHub repo, is a required field.");
           }
           return true;
       }
-  },
-      {
-        type: 'checkbox',
-        name: 'license',
-        message: 'Which license is used for this project:',
-        choices: ['Apache', 'Mozilla', 'MIT', 'GNU', 'Boost', 'ISC'],
-        validate: choicesLength => {
-          if (choicesLength.length <= 1) {
-            return true;
-          } else {
-            return "Please select one license!";
+    },
+    {
+      type: 'input',
+      message: "What is the title of your project?",
+      name: 'title',
+      default: 'Project Title',
+      validate: function (answer) {
+          if (answer.length < 1) {
+              return console.log("A project title, is a required field.");
           }
-        }
-      },
-      {
-        type: "input",
-        name: "usageInfo",
-        message: "Describe the main use case for this project/application:",
-      },
-      {
-        type: "input",
-        name: "contributionsInfo",
-        message: "Are their any guidlines for contributing to this project:",
-      },
-      {
-        type: "input",
-        name: "testsInfo",
-        message: "Which tests would you like to include:",
-      },
-      {
-        type: "input",
-        name: "githubUsername",
-        message: "What is your GitHub username (Required)?",
-      },
-      {
-        type: "input",
-        name: "emailInfo",
-        message: "What is a good email someone can reach you(Required)?",
+          return true;
       }
+    },
+        {
+          type: "input",
+          name: "usageInfo",
+          message: "Describe the main use case for this project/application:",
+        },
+        {
+          type: "input",
+          name: "contributionsInfo",
+          message: "Are their any guidlines for contributing to this project:",
+        },
+        {
+          type: "input",
+          name: "testsInfo",
+          message: "Which tests would you like to include:",
+        },
+        {
+          type: "input",
+          name: "githubUsername",
+          message: "What is your GitHub username (Required)?",
+        },
+        {
+          type: "input",
+          name: "emailInfo",
+          message: "What is a good email someone can reach you(Required)?",
+        }
 ];
 
 // TODO: Create a function to write README file
